@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>Palindrom i Ambigram daty</title>
+    <script>
+		function reverseString(str) {
+			var newString = "";
+			for (var i = str.length - 1; i >= 0; i--) {
+				newString += str[i];
+			}
+			return newString;
+		}
+
+		function ambigram(x){
+			var data="";
+			for(var i=0; i<x.length; i++)
+			{
+				if(x[i]=="3" || x[i]=="4" || x[i]=="7" )
+					return "";
+				else if(x[i]=="6")
+					data+=9;
+				else if(x[i]=="9")
+					data+=6;
+				else 
+					data+=x[i];
+			}
+				return data;
+		}
+	</script>
+</head>
+<body>
+    <h2>Palindrom i Ambigram daty</h2>
+	<script>
+		var lata=2100;
+		var ile_dni;
+		var data="", data2="", data3="";
+		var rok, dzien, miesiac;
+		var ile=0;
+		for(var i=2002; i<lata; i++){
+			rok=i;
+			for(var j=1; j<=12; j++){
+				if(j<10)
+					miesiac="0"+j;
+				else
+					miesiac=j;
+				if(j==1 || j==3 || j==5 || j==7 || j==8 || j==10 || j==12)
+					ile_dni=31;
+				else if(j==4 || j==6 || j==9 || j==11 )
+					ile_dni=30;
+				else if(j==2 && i%4==0)
+					ile_dni=29;
+				else
+					ile_dni=28;
+				for(var k=1; k<=ile_dni; k++)
+				{
+					if(k<10)
+						dzien="0"+k;
+					else	
+						dzien=""+k;
+
+					data=""+miesiac+""+dzien+""+rok;
+					data2=reverseString(data);
+					data3=ambigram(data);
+					
+					if(data==data2 && data3==data){
+						document.write(data+"<br>");
+						ile++
+					}
+				}
+			}
+		}
+			document.write(ile);
+    </script>
+</body>
+</html>
